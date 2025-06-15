@@ -72,19 +72,40 @@ function update($id) {
 
 echo "Тестовая страница <br>";
 
-add();
+// add();
 
 // update(2);
+
+$allBooks = BookTable::getList([
+    'select' => ['*'],
+]);
+echo "<h2>Все книги</h2>";
+echo "<ul>";
+while ($book = $allBooks->fetch()) {
+    echo "<li>ID: {$book['ID']}, ISBN: {$book['ISBN']}, Название: {$book['TITLE']}, PUBLISH_DATE: {$book['PUBLISH_DATE']}, Читателей: {$book['READERS_COUNT']}</li>";
+}
+echo "</ul>";
+
+
+
+$book = BookTable::getByPrimary(1)
+	->fetchObject();
+$title = $book->get('TITLE'); 
+$date = $book->get('PUBLISH_DATE');
+echo "<h2>Вывод полей конкретной книги</h2>";
+echo "". $title ." " . $date;
+
+
+if ($book) {
+    echo "<h2>Вывод конкретной книги в raw формате</h2>";
+    echo "<pre>";
+    print_r($book);
+    echo "</pre>";
+} else {
+    echo "<p>Книга с ID = {$id} не найдена</p>";
+}
+
 
 // Завершение работы с фреймворком
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_after.php");
 
-
-// CREATE TABLE IF NOT EXISTS `my_book` (
-//     `ID` int NOT NULL AUTO_INCREMENT,
-//      `ISBNCODE` varchar(255) NOT NULL,
-//      `TITLE` varchar(255) NOT NULL,
-//      `PUBLISH_DATE` date NOT NULL, 
-//      `EDITIONS_ISBN` text NOT NULL, 
-//      `READERS_COUNT` int NOT NULL, 
-//      PRIMARY KEY(`ID`))
