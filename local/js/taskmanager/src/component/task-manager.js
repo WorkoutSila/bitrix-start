@@ -1,14 +1,14 @@
 import {Item} from './item';
 import "./task-manager.css";
 
-export const TaskManger =
+export const TaskManager =
 {
 	components:
 	{
 		Item
 	},
 
-	data(): object
+	data()
 	{
 		return {
 			list: []
@@ -17,13 +17,13 @@ export const TaskManger =
 
 	methods:
 	{
-		addNew(): void
+		addNew()
 		{
 			const result = prompt(this.$Bitrix.Loc.getMessage('TASK_MANAGER_QUESTION'));
 			this.list.push(result);
 		},
 
-		close(): void
+		close()
 		{
 			this.$Bitrix.Application.get().detachTemplate();
 		},
