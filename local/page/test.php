@@ -1,10 +1,9 @@
 <?php
 
-require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
-
+require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php";
 // Разобраться с подключением классов!!!
 // Подключаем файл с таблицей
-require_once($_SERVER["DOCUMENT_ROOT"] . "/local/modules/somepartner.mybookscatalog/lib/book.php");
+require_once $_SERVER["DOCUMENT_ROOT"] . "/local/modules/somepartner.mybookscatalog/lib/book.php";
 
 use SomePartner\MyBooksCatalog\BookTable;
 use Bitrix\Main\Type;
@@ -97,9 +96,9 @@ echo "". $title ." " . $date;
 
 
 if ($book) {
-    echo "<h2>Вывод конкретной книги в raw формате</h2>";
+    echo "<h2>Вывод конкретной книги в symfony dd формате</h2>";
     echo "<pre>";
-    print_r($book);
+    dd($book);
     echo "</pre>";
 } else {
     echo "<p>Книга с ID = {$id} не найдена</p>";
@@ -107,5 +106,4 @@ if ($book) {
 
 
 // Завершение работы с фреймворком
-require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_after.php");
-
+require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php";
