@@ -1,0 +1,1 @@
+export default () => { return import ('../../components/vaganov/call.deal/js/CallModal.vue')}

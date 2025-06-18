@@ -1,0 +1,1 @@
+export default () => { return import ('../../components/macro/getDeals/js/GetDeals.vue')}

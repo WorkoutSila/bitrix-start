@@ -1,0 +1,25 @@
+@use 'el-ext.scss';
+@use 'custom.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .app label {
+    @apply block text-sm font-medium mb-1 ;
+  }
+  .app .badge-default{
+    @apply right-[8px] top-[8px] px-1.5 inline-flex items-center gap-x-1 text-xs bg-gray-200 text-gray-800 rounded-sm
+  }
+  .app .link{
+    @apply inline-flex items-center gap-x-1 text-sm text-[#2067b0] decoration-1 hover:underline hover:text-blue-800 cursor-pointer
+  }
+  .app .link-dotted{
+    @apply cursor-pointer text-gray-500 text-xs border-b border-slate-400 md:border-dashed
+  }
+  .app .upload-drag{
+    @apply bg-[#ffffff] rounded-md border-[#dcdfe6] hover:border-[#409eff] border-dashed border cursor-pointer
+  }
+}
