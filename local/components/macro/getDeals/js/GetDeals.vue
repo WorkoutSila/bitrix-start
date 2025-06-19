@@ -22,8 +22,7 @@ export default {
               }
             })
           .then(function (response) {
-            console.log("Респонс", response);
-
+            deals.value = JSON.parse(response.data)
           }).catch(function(error) {
             console.log("Ошибка получения сделок", error)
           });
@@ -44,22 +43,6 @@ export default {
 </script>
 
 <template>
-  <!-- <div>
-      <h2>Список сделок</h2>
-      <el-button type="primary">Primary</el-button>
-
-      <p v-if="loading">Загрузка...</p>
-      <p v-if="error" style="color: red;">{{ error }}</p>
-
-      <ul v-if="deals">
-          <div v-for="deal in deals" :key="deal.id">
-            <h1 class="text-3xl font-bold underline">{{ deal.TITLE }}</h1>
-            <h2>{{ deal.OPPORTUNITY }}</h2>
-            <h3>{{ deal.CURRENCY_ID }}</h3>
-            <br>
-          </div>
-      </ul>
-  </div> -->
   <div class="table" v-if="deals">
       <el-table
         :data="deals"
@@ -71,7 +54,7 @@ export default {
             <span class="text-1xl font-bold"> {{scope.row.TITLE}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="OPPORTUNITY" label="Потенциал" sortable />
+        <el-table-column prop="OPPORTUNITY" label="Потенциал" />
         <!-- Разобраться с сортировкой по сумме -->
         <el-table-column prop="CURRENCY_ID" label="Валюта" />
       </el-table>

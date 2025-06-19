@@ -14,8 +14,3 @@ Vue::file('components/macro/getDeals/js/GetDeals.vue');
 ?>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
-
-<!-- $APPLICATION->IncludeComponent(
-  "macro:getDeals",
-  "deals"
-); -->
