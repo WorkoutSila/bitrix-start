@@ -1,8 +1,7 @@
 <script>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import 'element-plus/dist/index.css'
 import axios from 'axios'
-// import { TableColumnCtx } from 'element-plus'
 export default {
     name: 'DealListComponent',
     setup() {
@@ -28,6 +27,7 @@ export default {
       };
 
       onMounted(() => {
+        // Получаем данные из ORM
           fetchDeals();
       });
           return {
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <!-- <div>
       <h2>Список сделок</h2>
       <el-button type="primary">Primary</el-button>
 
@@ -56,15 +56,15 @@ export default {
             <br>
           </div>
       </ul>
-  </div>
+  </div> -->
   <div class="table" v-if="deals">
       <el-table
         :data="deals"
         :default-sort="{ prop: 'OPPORTUNITY', order: 'ascending' }"
         style="width: 100%"
       >
-        <el-table-column prop="TITLE" label="Заголовок" sortable width="180" />
-        <el-table-column prop="OPPORTUNITY" label="Потенциал" sortable width="180" />
+        <el-table-column prop="TITLE" label="Заголовок" sortable width="500" />
+        <el-table-column prop="OPPORTUNITY" label="Потенциал" sortable width="500" />
         <!-- Разобраться с сортировкой по сумме -->
         <el-table-column prop="CURRENCY_ID" label="Валюта" />
       </el-table>
@@ -86,5 +86,9 @@ ul div h1 {
 }
 div p {
   color: rgb(0, 89, 255);
+}
+.table {
+  display: flex;
+  align-items: center;
 }
 </style>

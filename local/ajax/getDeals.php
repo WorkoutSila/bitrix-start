@@ -2,9 +2,9 @@
 use Bitrix\Crm\DealTable;
 require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 
-// Защита от прямого вызова
+// Скипаем авторизацию
 if (!defined("BX_SKIP_AUTH_CHECK")) {
-    define("BX_SKIP_AUTH_CHECK", true); // Убери это, если нужна авторизация
+    define("BX_SKIP_AUTH_CHECK", true);
 }
 
 if (!CModule::IncludeModule("crm")) {
