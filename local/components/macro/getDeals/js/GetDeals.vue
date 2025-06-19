@@ -11,19 +11,17 @@ export default {
       const fetchDeals = async () => {
           loading.value = true;
           error.value = null;
-          console.log("Получение сделок из ORM")
-
+          // Получение сделок из ORM через метод ajax контроллера
           BX.ajax.runComponentAction(
             'macro:getDeals', 'listDeals', 
             {
               mode: 'ajax',
-              data: {
-
-              }
             })
           .then(function (response) {
+            // Десериализация списка сделок
             deals.value = JSON.parse(response.data)
           }).catch(function(error) {
+            error.value = error
             console.log("Ошибка получения сделок", error)
           });
       };
@@ -43,24 +41,27 @@ export default {
 </script>
 
 <template>
-  <div class="table" v-if="deals">
-      <el-table
-        :data="deals"
-        :default-sort="{ prop: 'OPPORTUNITY', order: 'ascending' }"
-        style="width: 100%"
-      >
-        <el-table-column prop="TITLE" label="Заголовок" sortable >
-          <template #default="scope">
-            <span class="text-1xl font-bold"> {{scope.row.TITLE}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="OPPORTUNITY" label="Потенциал" />
-        <!-- Разобраться с сортировкой по сумме -->
-        <el-table-column prop="CURRENCY_ID" label="Валюта" />
-      </el-table>
-  </div>
-  <div v-else>
-    <p>Нет доступных сделок.</p>
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 text-gray-800">
+    <h1 class="text-4xl font-black mb-6 text-indigo-800 drop-shadow-md text-center">Список сделок</h1>
+    <div class="table" v-if="deals">
+        <el-table
+          :data="deals"
+          :default-sort="{ prop: 'OPPORTUNITY', order: 'ascending' }"
+          style="width: 100%"
+        >
+          <el-table-column prop="TITLE" label="Заголовок" sortable >
+            <template #default="scope">
+              <span class="text-1xl font-bold"> {{scope.row.TITLE}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="OPPORTUNITY" label="Потенциал" />
+          <!-- Разобраться с сортировкой по сумме -->
+          <el-table-column prop="CURRENCY_ID" label="Валюта" />
+        </el-table>
+    </div>
+    <div v-else>
+      <p>Нет доступных сделок.</p>
+    </div>
   </div>
 </template>
 
