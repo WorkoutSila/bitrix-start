@@ -1,7 +1,6 @@
 <script>
 import { ref, onMounted } from 'vue';
 import 'element-plus/dist/index.css'
-import axios from 'axios'
 export default {
     name: 'DealListComponent',
     setup() {
@@ -12,18 +11,22 @@ export default {
       const fetchDeals = async () => {
           loading.value = true;
           error.value = null;
-          // Можно будет импортировать тост с выводом ошибки
+          console.log("Получение сделок из ORM")
 
-          try {
-            const response = await axios.get('/local/ajax/getDeals.php')
-            deals.value = response.data
-            console.log("Сделки: ", deals.value)
-          
-          } catch (err) {
-            console.log(err)
-          } finally {
-            loading.value = false
-          }
+          BX.ajax.runComponentAction(
+            'macro:getDeals', 'listDeals', 
+            {
+              mode: 'ajax',
+              data: {
+
+              }
+            })
+          .then(function (response) {
+            console.log("Респонс", response);
+
+          }).catch(function(error) {
+            console.log("Ошибка получения сделок", error)
+          });
       };
 
       onMounted(() => {
@@ -63,8 +66,12 @@ export default {
         :default-sort="{ prop: 'OPPORTUNITY', order: 'ascending' }"
         style="width: 100%"
       >
-        <el-table-column prop="TITLE" label="Заголовок" sortable width="500" />
-        <el-table-column prop="OPPORTUNITY" label="Потенциал" sortable width="500" />
+        <el-table-column prop="TITLE" label="Заголовок" sortable >
+          <template #default="scope">
+            <span class="text-1xl font-bold"> {{scope.row.TITLE}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="OPPORTUNITY" label="Потенциал" sortable />
         <!-- Разобраться с сортировкой по сумме -->
         <el-table-column prop="CURRENCY_ID" label="Валюта" />
       </el-table>
@@ -76,7 +83,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
 .title {
   font-size: 25px;
 }
